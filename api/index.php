@@ -30,6 +30,7 @@ if (!file_exists($sqliteDest)) {
 }
 
 // Set runtime environment variables for Vercel
+putenv('APP_STORAGE_PATH=' . $tmpStorage);
 putenv('DB_CONNECTION=sqlite');
 putenv('DB_DATABASE=' . $sqliteDest);
 putenv('VIEW_COMPILED_PATH=' . $tmpStorage . '/framework/views');
