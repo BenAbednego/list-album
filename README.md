@@ -1,58 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📸 Private Shared Photo Album & Memory Vault
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> **Solusi galeri foto digital privat yang memungkinkan pengguna (pasangan, keluarga, atau tim dekat) berbagi akun dan saling mengelola album foto bersama secara privat dan aman.**
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🎯 Latar Belakang & Tujuan Project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Di era digital saat ini, berbagi foto kenangan bersama orang terdekat (pasangan, keluarga, atau sahabat) seringkali dihadapkan pada beberapa kendala:
+- **Penyimpanan Cloud Publik Terbatas/Berbayar:** Layanan cloud seperti Google Photos atau iCloud seringkali membutuhkan biaya langganan bulanan jika kuota habis.
+- **Masalah Privasi:** Mengunggah ke media sosial publik seperti Instagram tidak selalu nyaman untuk momen-momen yang bersifat personal dan privat.
+- **Kebutuhan Kolaborasi Sederhana:** Keinginan untuk memiliki satu ruang galeri bersama tempat kedua belah pihak bisa **saling menambah album dan mengunggah foto kenangan sendiri-sendiri** hanya dengan berbagi akses akun (Email & Password).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Project ini dibuat sebagai jawaban atas kebutuhan tersebut.** 
 
-## Learning Laravel
+Dengan aplikasi ini, pengguna dapat membuat satu akun bersama (*shared account*). Siapa saja yang memegang kredensial (Email & Password) akun tersebut dari perangkat mana pun dapat masuk ke galeri privat yang sama, membuat album foto baru, dan mengabadikan momen penting bersama tanpa campur tangan pihak ketiga.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ✨ Fitur Utama
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- 🔐 **Shared Private Authentication**: Sistem login aman berbasis akun bersama. Cukup gunakan 1 pasang Email & Password untuk diakses oleh orang-orang terpercaya.
+- 📁 **Dynamic Album Management**: Buat, ubah nama, dan hapus album foto dengan mudah sesuai kategori (misal: *"Liburan Bali"*, *"Wisuda 2026"*, *"Tugas Kelompok"*).
+- 🖼️ **Photo Collection & Storyteller**: Unggah foto dengan dukungan judul, tanggal momen diambil, dan deskripsi cerita di balik foto tersebut.
+- 🔍 **Live Instant Search**: Cari foto favorit secara instan tanpa perlu me-refresh halaman web.
+- 🎨 **Warm Studio Aesthetic UI**: Desain antarmuka modern yang tenang, estetik, ramah di mata (*Warm Cream & Amber Theme*), dirancang agar warna foto tetap menonjol.
+- 🗄️ **Zero-Config File Database**: Menggunakan SQLite yang menjamin data tersimpan secara permanen dalam bentuk berkas lokal tanpa perlu setup database server yang rumit.
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🏗️ Teknologi yang Digunakan
 
+Aplikasi ini dibangun menggunakan arsitektur modern yang ringan dan cepat:
+
+- **Framework**: [Laravel 11](https://laravel.com/) (PHP MVC Architecture)
+- **Frontend & Styles**: HTML5, Vanilla CSS (Custom Design System with Variables), Vite
+- **Database**: [SQLite](https://www.sqlite.org/) (File-based Local Database)
+- **Security**: Laravel Authentication, Session Management, CSRF Protection, Mass Assignment Protection (`$fillable`).
+
+---
+
+## 🚀 Cara Menjalankan Project di Lokal
+
+### 1. Prasyarat Sistem
+Pastikan komputer Anda sudah terinstal:
+- **PHP** (v8.2 atau lebih baru) & **Composer**
+- **Node.js** & **npm**
+
+### 2. Langkah Setup Pertama Kali
 ```bash
-composer require laravel/boost --dev
+# 1. Clone repositori ini
+git clone https://github.com/username/list-album.git
+cd list-album
 
-php artisan boost:install
+# 2. Copy file environment
+cp .env.example .env
+
+# 3. Install dependensi PHP & Node
+composer install
+npm install
+
+# 4. Generate Application Key
+php artisan key:generate
+
+# 5. Siapkan Database SQLite & Migrasi Tabel
+touch database/database.sqlite
+php artisan migrate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 3. Menjalankan Server Aplikasi
+Jalankan **2 perintah ini di 2 tab terminal terpisah**:
 
-## Contributing
+* **Terminal 1 (Backend Server):**
+  ```bash
+  php artisan serve
+  ```
+* **Terminal 2 (Frontend Assets Compiler):**
+  ```bash
+  npm run dev
+  ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Buka browser dan akses ke: 👉 **`http://127.0.0.1:8000`**
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🤝 Cara Penggunaan untuk Berbagi Akses
 
-## Security Vulnerabilities
+1. Buka `http://127.0.0.1:8000/register` di browser Anda untuk membuat akun pertama kali.
+2. Bagikan **Email & Password** akun tersebut ke pasangan, teman, atau anggota keluarga Anda.
+3. Mereka dapat melakukan **Login** dari perangkat mereka masing-masing menggunakan akun yang sama.
+4. Kalian berdua kini dapat **saling membuat album, mengunggah foto, dan melihat galeri kenangan bersama secara privat**!
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+*Dibuat dengan ❤️ untuk kemudahan mengabadikan momen kenangan bersama.*

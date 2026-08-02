@@ -6,20 +6,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --primary-yellow: #f2b705;
-    --primary-yellow-light: #ffd24d;
-    --primary-yellow-dark: #b88a00;
-    --bg-yellow: #ffc400;
-    --dark-bg: #1c1c1e;
-    --dark-card: #2c2c2e;
-    --sidebar-bg: #cca008;
-    --text-dark: #121212;
-    --text-muted: #666666;
+    --primary-yellow: #d97706;
+    --primary-yellow-light: #f59e0b;
+    --primary-yellow-dark: #b45309;
+    --bg-yellow: #fdfbf7;
+    --dark-bg: #292524;
+    --dark-card: #3f3f46;
+    --sidebar-bg: #f3eee7;
+    --text-dark: #1c1917;
+    --text-muted: #78716c;
     --text-light: #ffffff;
-    --text-light-muted: #cccccc;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --text-light-muted: #d6d3d1;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
     --radius-sm: 8px;
     --radius-md: 16px;
     --radius-lg: 24px;
@@ -267,20 +267,23 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 12px;
-    border: 2px solid var(--text-dark);
-    background: none;
+    border: none;
+    background: var(--dark-bg);
+    color: var(--text-light);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     margin: 20px auto 0 auto;
     transition: var(--transition);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-add-album-trigger:hover {
-    background: var(--text-dark);
+    background: #121212;
     color: var(--primary-yellow);
-    transform: rotate(90deg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-add-album-trigger svg {
