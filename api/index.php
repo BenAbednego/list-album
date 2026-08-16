@@ -44,10 +44,15 @@ if (!file_exists($sqliteDest) || filesize($sqliteDest) === 0) {
 // Set runtime environment variables for Vercel in putenv, $_ENV, and $_SERVER
 $appKey = getenv('APP_KEY') ?: 'base64:B7s81iZA6/OkI6GBG8H/8wwn1ka6Zv/COGl0WOq1V8Y=';
 
+$_SERVER['HTTPS'] = 'on';
+$_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+$_SERVER['HTTP_X_FORWARDED_PORT'] = '443';
+
 $envVars = [
     'APP_ENV' => 'production',
     'APP_DEBUG' => 'true',
     'APP_KEY' => $appKey,
+    'APP_URL' => 'https://list-album.vercel.app',
     'LARAVEL_STORAGE_PATH' => $tmpStorage,
     'APP_BOOTSTRAP_PATH' => $tmpBootstrap,
     'LOG_CHANNEL' => 'stderr',
