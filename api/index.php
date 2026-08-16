@@ -29,12 +29,24 @@ if (!file_exists($sqliteDest)) {
     }
 }
 
-// Set runtime environment variables for Vercel
-putenv('APP_DEBUG=true');
-putenv('APP_STORAGE_PATH=' . $tmpStorage);
-putenv('DB_CONNECTION=sqlite');
-putenv('DB_DATABASE=' . $sqliteDest);
-putenv('VIEW_COMPILED_PATH=' . $tmpStorage . '/framework/views');
+// Set runtime environment variables for Vercel in putenv, $_ENV, and $_SERVER
+$appKey = getenv('APP_KEY') ?: 'base64:B7s81iZA6/OkI6GBG8H/8wwn1ka6Zv/COGl0WOq1V8Y=';
+
+$envVars = [
+    'APP_ENV' => 'production',
+    'APP_DEBUG' => 'true',
+    'APP_KEY' => $appKey,
+    'APP_STORAGE_PATH' => $tmpStorage,
+    'DB_CONNECTION' => 'sqlite',
+    'DB_DATABASE' => $sqliteDest,
+    'VIEW_COMPILED_PATH' => $tmpStorage . '/framework/views',
+];
+
+foreach ($envVars as $key => $val) {
+    putenv("{$key}={$val}");
+    $_ENV[$key] = $val;
+    $_SERVER[$key] = $val;
+}
 
 // Forward requests to Laravel's public/index.php
 require __DIR__ . '/../public/index.php';
