@@ -6,14 +6,6 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
-    ->registered(function ($app) {
-        if ($storagePath = getenv('APP_STORAGE_PATH')) {
-            $app->useStoragePath($storagePath);
-        }
-        if (getenv('APP_BOOTSTRAP_PATH')) {
-            $app->useBootstrapPath(getenv('APP_BOOTSTRAP_PATH'));
-        }
-    })
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
