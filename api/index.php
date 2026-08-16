@@ -1,5 +1,20 @@
 <?php
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error !== null) {
+        http_response_code(500);
+        echo "<h1>Vercel PHP Fatal Error</h1>";
+        echo "<p><strong>Type:</strong> " . $error['type'] . "</p>";
+        echo "<p><strong>Message:</strong> " . htmlspecialchars($error['message']) . "</p>";
+        echo "<p><strong>File:</strong> " . htmlspecialchars($error['file']) . ":" . $error['line'] . "</p>";
+    }
+});
+
 // Prepare /tmp directory for Vercel Serverless Environment
 $tmpStorage = '/tmp/storage';
 $tmpBootstrap = '/tmp/bootstrap';
