@@ -2,11 +2,13 @@
 
 // Prepare /tmp directory for Vercel Serverless Environment
 $tmpStorage = '/tmp/storage';
+$tmpBootstrap = '/tmp/bootstrap';
 $directories = [
     $tmpStorage . '/framework/views',
     $tmpStorage . '/framework/cache',
     $tmpStorage . '/framework/sessions',
     $tmpStorage . '/logs',
+    $tmpBootstrap . '/cache',
     '/tmp/database',
     '/tmp/uploads'
 ];
@@ -37,6 +39,7 @@ $envVars = [
     'APP_DEBUG' => 'true',
     'APP_KEY' => $appKey,
     'LARAVEL_STORAGE_PATH' => $tmpStorage,
+    'APP_BOOTSTRAP_PATH' => $tmpBootstrap,
     'LOG_CHANNEL' => 'stderr',
     'DB_CONNECTION' => 'sqlite',
     'DB_DATABASE' => $sqliteDest,
