@@ -1,95 +1,80 @@
-# 📸 Private Shared Photo Album & Memory Vault
+Private Shared Photo Album & Memory Vault
 
-> **Solusi galeri foto digital privat yang memungkinkan pengguna (pasangan, keluarga, atau tim dekat) berbagi akun dan saling mengelola album foto bersama secara privat dan aman.**
+A private digital photo gallery solution that enables users (couples, families, or close-knit teams) to share an account and collaboratively manage shared photo albums in a private and secure manner.
 
----
 
-## 🎯 Latar Belakang & Tujuan Project
+1. Project Background & Objectives
 
-Di era digital saat ini, berbagi foto kenangan bersama orang terdekat (pasangan, keluarga, atau sahabat) seringkali dihadapkan pada beberapa kendala:
-- **Penyimpanan Cloud Publik Terbatas/Berbayar:** Layanan cloud seperti Google Photos atau iCloud seringkali membutuhkan biaya langganan bulanan jika kuota habis.
-- **Masalah Privasi:** Mengunggah ke media sosial publik seperti Instagram tidak selalu nyaman untuk momen-momen yang bersifat personal dan privat.
-- **Kebutuhan Kolaborasi Sederhana:** Keinginan untuk memiliki satu ruang galeri bersama tempat kedua belah pihak bisa **saling menambah album dan mengunggah foto kenangan sendiri-sendiri** hanya dengan berbagi akses akun (Email & Password).
+In today's digital era, sharing cherished photos with loved ones (partners, family, or close friends) often presents several challenges:
+- Limited/Paid Public Cloud Storage: Cloud services like Google Photos or iCloud often require monthly subscription fees once storage limits are reached.
+- Privacy Concerns: Uploading to public social media platforms like Instagram may not feel comfortable for moments that are deeply personal and private.
+- Need for Simple Collaboration: A desire for a unified gallery space where both parties can add albums and upload their own photos simply by sharing account access (Email & Password).
 
-**Project ini dibuat sebagai jawaban atas kebutuhan tersebut.** 
+This project was created to address these needs. With this application, users can create a single shared account. Anyone possessing the account credentials (Email & Password)—regardless of the device used—can access the same private gallery, create new photo albums, and preserve important moments together without third-party interference.
 
-Dengan aplikasi ini, pengguna dapat membuat satu akun bersama (*shared account*). Siapa saja yang memegang kredensial (Email & Password) akun tersebut dari perangkat mana pun dapat masuk ke galeri privat yang sama, membuat album foto baru, dan mengabadikan momen penting bersama tanpa campur tangan pihak ketiga.
 
----
+2. Key Features
 
-## ✨ Fitur Utama
+- Shared Private Authentication: A secure login system based on a shared account. Trusted individuals can access the platform using a single set of Email & Password credentials. - **Dynamic Album Management**: Easily create, rename, and delete photo albums based on categories (e.g., "Bali Vacation," "Graduation 2026," "Group Project").
+- **Photo Collection & Storyteller**: Upload photos with support for titles, capture dates, and descriptions of the stories behind the images.
+- **Live Instant Search**: Instantly search for your favorite photos without needing to refresh the web page.
+- **Warm Studio Aesthetic UI**: A modern, calming, and eye-friendly interface design (Warm Cream & Amber Theme), crafted to let photo colors stand out.
+- **Zero-Config File Database**: Uses SQLite to ensure data is permanently stored in a local file, eliminating the need for complex database server setups.
 
-- 🔐 **Shared Private Authentication**: Sistem login aman berbasis akun bersama. Cukup gunakan 1 pasang Email & Password untuk diakses oleh orang-orang terpercaya.
-- 📁 **Dynamic Album Management**: Buat, ubah nama, dan hapus album foto dengan mudah sesuai kategori (misal: *"Liburan Bali"*, *"Wisuda 2026"*, *"Tugas Kelompok"*).
-- 🖼️ **Photo Collection & Storyteller**: Unggah foto dengan dukungan judul, tanggal momen diambil, dan deskripsi cerita di balik foto tersebut.
-- 🔍 **Live Instant Search**: Cari foto favorit secara instan tanpa perlu me-refresh halaman web.
-- 🎨 **Warm Studio Aesthetic UI**: Desain antarmuka modern yang tenang, estetik, ramah di mata (*Warm Cream & Amber Theme*), dirancang agar warna foto tetap menonjol.
-- 🗄️ **Zero-Config File Database**: Menggunakan SQLite yang menjamin data tersimpan secara permanen dalam bentuk berkas lokal tanpa perlu setup database server yang rumit.
 
----
+3. Technologies Used
 
-## 🏗️ Teknologi yang Digunakan
-
-Aplikasi ini dibangun menggunakan arsitektur modern yang ringan dan cepat:
+This application is built using a modern, lightweight, and fast architecture:
 
 - **Framework**: [Laravel 11](https://laravel.com/) (PHP MVC Architecture)
 - **Frontend & Styles**: HTML5, Vanilla CSS (Custom Design System with Variables), Vite
 - **Database**: [SQLite](https://www.sqlite.org/) (File-based Local Database)
 - **Security**: Laravel Authentication, Session Management, CSRF Protection, Mass Assignment Protection (`$fillable`).
 
----
 
-## 🚀 Cara Menjalankan Project di Lokal
+4. How to Run the Project Locally
 
-### 1. Prasyarat Sistem
-Pastikan komputer Anda sudah terinstal:
-- **PHP** (v8.2 atau lebih baru) & **Composer**
-- **Node.js** & **npm**
+1. System Prerequisites
+Ensure the following are installed on your computer:
+- PHP (v8.2 or newer) & Composer
+- Node.js & npm
 
-### 2. Langkah Setup Pertama Kali
+2. Initial Setup Steps
 ```bash
-# 1. Clone repositori ini
+# 1. Clone this repository
 git clone https://github.com/username/list-album.git
 cd list-album
 
-# 2. Copy file environment
+# 2. Copy the environment file
 cp .env.example .env
 
-# 3. Install dependensi PHP & Node
+# 3. Install PHP & Node dependencies
 composer install
 npm install
 
 # 4. Generate Application Key
 php artisan key:generate
 
-# 5. Siapkan Database SQLite & Migrasi Tabel
+# 5. Prepare SQLite Database & Run Migrations
 touch database/database.sqlite
 php artisan migrate
 ```
 
-### 3. Menjalankan Server Aplikasi
-Jalankan **2 perintah ini di 2 tab terminal terpisah**:
+3. Running the Application Server
+Run these 2 commands in separate terminal tabs:
+Terminal 1 (Backend Server): ```bash
+php artisan serve
+```
+Terminal 2 (Frontend Assets Compiler):
+```bash
+npm run dev
+```
 
-* **Terminal 1 (Backend Server):**
-  ```bash
-  php artisan serve
-  ```
-* **Terminal 2 (Frontend Assets Compiler):**
-  ```bash
-  npm run dev
-  ```
+Open your browser and visit: `http://127.0.0.1:8000`
 
-Buka browser dan akses ke: 👉 **`http://127.0.0.1:8000`**
+How to Share Access
 
----
-
-## 🤝 Cara Penggunaan untuk Berbagi Akses
-
-1. Buka `http://127.0.0.1:8000/register` di browser Anda untuk membuat akun pertama kali.
-2. Bagikan **Email & Password** akun tersebut ke pasangan, teman, atau anggota keluarga Anda.
-3. Mereka dapat melakukan **Login** dari perangkat mereka masing-masing menggunakan akun yang sama.
-4. Kalian berdua kini dapat **saling membuat album, mengunggah foto, dan melihat galeri kenangan bersama secara privat**!
-
----
-
-*Dibuat dengan ❤️ untuk kemudahan mengabadikan momen kenangan bersama.*
+1. Open `http://127.0.0.1:8000/register` in your browser to create an initial account.
+2. Share the account's email and password with your partner, friend, or family member.
+3. They can log in from their own devices using the same account.
+4. You can now **create albums, upload photos, and view your shared gallery of memories privately!**
