@@ -33,8 +33,8 @@ if (is_dir($bootstrapSourceDir)) {
 $sqliteSource = __DIR__ . '/../database/database.sqlite';
 $sqliteDest = '/tmp/database/database.sqlite';
 
-if (!file_exists($sqliteDest)) {
-    if (file_exists($sqliteSource)) {
+if (!file_exists($sqliteDest) || filesize($sqliteDest) === 0) {
+    if (file_exists($sqliteSource) && filesize($sqliteSource) > 0) {
         @copy($sqliteSource, $sqliteDest);
     } else {
         @touch($sqliteDest);
@@ -70,7 +70,17 @@ $app = require __DIR__ . '/../bootstrap/app.php';
 $app->useBootstrapPath($tmpBootstrap);
 $app->useStoragePath($tmpStorage);
 
+// Auto-run migrations if database tables are not present
+try {
+    if (!\Illuminate\Support\Facades\Schema::hasTable('users')) {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+    }
+} catch (\Throwable $e) {
+    // Migration fallback
+}
+
 $app->handleRequest(\Illuminate\Http\Request::capture());
+
 
 
 
