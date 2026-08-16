@@ -50,9 +50,10 @@ $_SERVER['HTTP_X_FORWARDED_PORT'] = '443';
 
 $envVars = [
     'APP_ENV' => 'production',
-    'APP_DEBUG' => 'true',
+    'APP_DEBUG' => 'false',
     'APP_KEY' => $appKey,
     'APP_URL' => 'https://list-album.vercel.app',
+    'ASSET_URL' => 'https://list-album.vercel.app',
     'LARAVEL_STORAGE_PATH' => $tmpStorage,
     'APP_BOOTSTRAP_PATH' => $tmpBootstrap,
     'LOG_CHANNEL' => 'stderr',
