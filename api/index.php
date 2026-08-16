@@ -52,7 +52,15 @@ foreach ($envVars as $key => $val) {
     $_SERVER[$key] = $val;
 }
 
-// Forward requests to Laravel's public/index.php
-require __DIR__ . '/../public/index.php';
+try {
+    // Forward requests to Laravel's public/index.php
+    require __DIR__ . '/../public/index.php';
+} catch (\Throwable $e) {
+    http_response_code(500);
+    echo "<h1>Vercel Deployment Exception</h1>";
+    echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
+    echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p>";
+    echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
+}
 
 
