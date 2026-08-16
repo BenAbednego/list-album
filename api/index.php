@@ -34,6 +34,14 @@ foreach ($directories as $dir) {
     }
 }
 
+// Copy pre-discovered bootstrap cache manifests to /tmp/bootstrap/cache
+$bootstrapSourceDir = __DIR__ . '/../bootstrap/cache';
+if (is_dir($bootstrapSourceDir)) {
+    foreach (glob($bootstrapSourceDir . '/*.php') as $file) {
+        @copy($file, $tmpBootstrap . '/cache/' . basename($file));
+    }
+}
+
 // Ensure SQLite database exists in /tmp
 $sqliteSource = __DIR__ . '/../database/database.sqlite';
 $sqliteDest = '/tmp/database/database.sqlite';
