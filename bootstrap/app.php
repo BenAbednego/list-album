@@ -10,6 +10,9 @@ return Application::configure(basePath: dirname(__DIR__))
         if ($storagePath = getenv('APP_STORAGE_PATH')) {
             $app->useStoragePath($storagePath);
         }
+        if (getenv('APP_BOOTSTRAP_PATH')) {
+            $app->useBootstrapPath(getenv('APP_BOOTSTRAP_PATH'));
+        }
     })
     ->withRouting(
         web: __DIR__.'/../routes/web.php',

@@ -7,11 +7,13 @@ error_reporting(E_ALL);
 try {
     // Prepare /tmp directory for Vercel Serverless Environment
     $tmpStorage = '/tmp/storage';
+    $tmpBootstrap = '/tmp/bootstrap';
     $directories = [
         $tmpStorage . '/framework/views',
         $tmpStorage . '/framework/cache',
         $tmpStorage . '/framework/sessions',
         $tmpStorage . '/logs',
+        $tmpBootstrap . '/cache',
         '/tmp/database',
         '/tmp/uploads'
     ];
@@ -19,6 +21,14 @@ try {
     foreach ($directories as $dir) {
         if (!is_dir($dir)) {
             @mkdir($dir, 0755, true);
+        }
+    }
+
+    // Copy bootstrap packages/services files if available to /tmp/bootstrap/cache
+    $bootstrapCacheSource = __DIR__ . '/../bootstrap/cache';
+    if (is_dir($bootstrapCacheSource)) {
+        foreach (glob($bootstrapCacheSource . '/*.php') as $file) {
+            @copy($file, $tmpBootstrap . '/cache/' . basename($file));
         }
     }
 
@@ -42,6 +52,8 @@ try {
         'APP_DEBUG' => 'true',
         'APP_KEY' => $appKey,
         'APP_STORAGE_PATH' => $tmpStorage,
+        'APP_BOOTSTRAP_PATH' => $tmpBootstrap,
+        'LOG_CHANNEL' => 'stderr',
         'DB_CONNECTION' => 'sqlite',
         'DB_DATABASE' => $sqliteDest,
         'VIEW_COMPILED_PATH' => $tmpStorage . '/framework/views',
