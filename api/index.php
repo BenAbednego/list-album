@@ -1,19 +1,6 @@
 <?php
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-register_shutdown_function(function() {
-    $error = error_get_last();
-    if ($error !== null) {
-        http_response_code(500);
-        echo "<h1>Vercel PHP Fatal Error</h1>";
-        echo "<p><strong>Type:</strong> " . $error['type'] . "</p>";
-        echo "<p><strong>Message:</strong> " . htmlspecialchars($error['message']) . "</p>";
-        echo "<p><strong>File:</strong> " . htmlspecialchars($error['file']) . ":" . $error['line'] . "</p>";
-    }
-});
+define('LARAVEL_START', microtime(true));
 
 // Prepare /tmp directory for Vercel Serverless Environment
 $tmpStorage = '/tmp/storage';
@@ -75,15 +62,15 @@ foreach ($envVars as $key => $val) {
     $_SERVER[$key] = $val;
 }
 
-try {
-    // Forward requests to Laravel's public/index.php
-    require __DIR__ . '/../public/index.php';
-} catch (\Throwable $e) {
-    http_response_code(500);
-    echo "<h1>Vercel Deployment Exception</h1>";
-    echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
-    echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p>";
-    echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
-}
+require __DIR__ . '/../vendor/autoload.php';
+
+/** @var \Illuminate\Foundation\Application $app */
+$app = require __DIR__ . '/../bootstrap/app.php';
+
+$app->useBootstrapPath($tmpBootstrap);
+$app->useStoragePath($tmpStorage);
+
+$app->handleRequest(\Illuminate\Http\Request::capture());
+
 
 
